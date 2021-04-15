@@ -1,0 +1,156 @@
+﻿@model Repaso.WebApplicationUI.Models.EmpleadoViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<h2>Lista de Empleados</h2>
+
+<p>
+    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#empleadoModal">Nuevo Empleado</a>
+</p>
+
+<div class="modal fade" id="empleadoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Información de Empleado</h2>
+            </div>
+            <div class="modal-body">
+                <form id="empleadoForm">
+                    <label>Nombre</label>
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                    <label>Dirección</label>
+                    @Html.TextBoxFor(m => m.Direccion, new { @class = "form-control" })
+                    <label>Email</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    <label>Telefono</label>
+                    @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a href="#" id="btnSave" class="btn btn-primary mr-2">Guardar</a>
+                    <a href="#" id="btnCancel" class="btn btn-danger">Cancelar</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Confirmar</h2>
+            </div>
+            <div class="modal-body">
+                <h3>¿Esta seguro que quiere eliminar a este empleado?</h3>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a href="#" id="btnEliminar" class="btn btn-primary mr-2">Eliminar</a>
+                    <a href="#" id="btnCancelConfirm" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<table class="table table-bordered">
+    <tr class="btn-primary">
+        <th>
+            Nombre
+        </th>
+        <th>
+            Direccion
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in ViewBag.EmpleadoViewModel) {
+    <tr>
+        <td>
+            @item.Nombre
+        </td>
+        <td>
+            @item.Direccion
+        </td>
+        <td>
+            @item.Email
+        </td>
+        <td>
+            @item.Telefono
+        </td>
+        <td>
+            <a hrel="#" id="showModal" class="btn btn-danger" onclick="Confirm(@item.EmpleadoId)">Eliminar</a> |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EmpleadoId })
+        </td>
+    </tr>
+}
+
+</table>
+
+<input type="hidden" id="empleadoId" />
+
+<script>
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            var empleadoFormData = $("#empleadoForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/Empleado/Create",
+                data: empleadoFormData,
+                success: function () {
+                    window.location.href = "/Empleado/Index";
+                }
+            })
+        })
+
+        $("#btnCancel").click(function () {
+            window.location.href = "/Empleado/Index";
+        })
+
+        $("#btnCancelConfirm").click(function () {
+            window.location.href = "/Empleado/Index";
+        })
+
+        $("#btnEliminar").click(function () {
+            var _id = $("#empleadoId").val();
+            $.ajax({
+                type: "POST",
+                url: "/Empleado/Delete",
+                data: { id:_id },
+                success: function (result) {
+                    if (result) {
+                        $("#deleteModal").modal('hide');
+                        $("#empleadoId").val(null);
+                        window.location.href = "/Empleado/Index";
+                    } else {
+                        alert("Se produjo un error al procesar su solicitud");
+                    } 
+                }
+            });
+        })
+    })
+
+    var Confirm = function (id) {
+        $("#empleadoId").val(id);
+        $("#deleteModal").modal('show');
+    }
+</script>

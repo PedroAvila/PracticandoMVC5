@@ -1,0 +1,6 @@
+D:\Csharp\Prueba\Repaso.EntidadesDominio\bin\Debug\Repaso.EntidadesDominio.dll
+D:\Csharp\Prueba\Repaso.EntidadesDominio\bin\Debug\Repaso.EntidadesDominio.pdb
+D:\Csharp\Prueba\Repaso.EntidadesDominio\obj\Debug\Repaso.EntidadesDominio.csprojAssemblyReference.cache
+D:\Csharp\Prueba\Repaso.EntidadesDominio\obj\Debug\Repaso.EntidadesDominio.csproj.CoreCompileInputs.cache
+D:\Csharp\Prueba\Repaso.EntidadesDominio\obj\Debug\Repaso.EntidadesDominio.dll
+D:\Csharp\Prueba\Repaso.EntidadesDominio\obj\Debug\Repaso.EntidadesDominio.pdb

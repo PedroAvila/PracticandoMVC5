@@ -1,0 +1,11 @@
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.ServiciosDominio.dll
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.ServiciosDominio.pdb
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.EntidadesDominio.dll
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.Persistencia.dll
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.EntidadesDominio.pdb
+D:\Csharp\Prueba\Repaso.ServiciosDominio\bin\Debug\Repaso.Persistencia.pdb
+D:\Csharp\Prueba\Repaso.ServiciosDominio\obj\Debug\Repaso.ServiciosDominio.csprojAssemblyReference.cache
+D:\Csharp\Prueba\Repaso.ServiciosDominio\obj\Debug\Repaso.ServiciosDominio.csproj.CoreCompileInputs.cache
+D:\Csharp\Prueba\Repaso.ServiciosDominio\obj\Debug\Repaso.ServiciosDominio.csproj.CopyComplete
+D:\Csharp\Prueba\Repaso.ServiciosDominio\obj\Debug\Repaso.ServiciosDominio.dll
+D:\Csharp\Prueba\Repaso.ServiciosDominio\obj\Debug\Repaso.ServiciosDominio.pdb

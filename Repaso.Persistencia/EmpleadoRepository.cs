@@ -13,7 +13,7 @@ namespace Repaso.Persistencia
     {
         public List<Empleado> GetAll()
         {
-            using(SqlConnection cn = Conexion.Connect("default"))
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["default"].ToString()))
             {
                 cn.Open();
                 using (var cmd = cn.CreateCommand())
@@ -42,7 +42,7 @@ namespace Repaso.Persistencia
 
         public void Create(Empleado entity)
         {
-            using (SqlConnection cn = Conexion.Connect("default"))
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["default"].ToString()))
             {
                 cn.Open();
                 using (var cmd = cn.CreateCommand())

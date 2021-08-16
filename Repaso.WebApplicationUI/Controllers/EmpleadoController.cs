@@ -24,9 +24,59 @@ namespace Repaso.WebApplicationUI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return PartialView("_Create");
+        }
+
         [HttpPost]
         public ActionResult Create(EmpleadoViewModel entity)
         {
+            if (ModelState.IsValid)
+            {
+                var empleado = Mapper.Map<Empleado>(entity);
+                _sdEmpleado.Create(empleado);
+
+                return RedirectToAction("Index");
+            }
+            else
+                return HttpNotFound();
+        }
+
+        [HttpGet]
+        public JsonResult Single(int id)
+        {
+            bool result = false;
+            var empleado = _sdEmpleado.Single(id);
+            if (empleado != null)
+            {
+                var empleadoVM = new EmpleadoViewModel()
+                {
+                    EmpleadoId = empleado.EmpleadoId,
+                    Nombre = empleado.Nombre,
+                    Direccion = empleado.Direccion,
+                    Email = empleado.Email,
+                    Telefono = empleado.Telefono
+                };
+                result = true;
+            }
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            var entity = _sdEmpleado.Single(id);
+            var modelo = Mapper.Map<EmpleadoViewModel>(entity);
+            return View("_Update", modelo);
+        }
+
+        [HttpPost]
+        public ActionResult Update(int id, EmpleadoViewModel entity)
+        {
+            entity.EmpleadoId = id;
             var empleado = Mapper.Map<Empleado>(entity);
             _sdEmpleado.Create(empleado);
 

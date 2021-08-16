@@ -2,8 +2,8 @@ D:\Csharp\Prueba\Repaso.Persistencia\bin\Debug\Repaso.Persistencia.dll
 D:\Csharp\Prueba\Repaso.Persistencia\bin\Debug\Repaso.Persistencia.pdb
 D:\Csharp\Prueba\Repaso.Persistencia\bin\Debug\Repaso.EntidadesDominio.dll
 D:\Csharp\Prueba\Repaso.Persistencia\bin\Debug\Repaso.EntidadesDominio.pdb
-D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.csprojAssemblyReference.cache
 D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.csproj.CoreCompileInputs.cache
 D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.csproj.CopyComplete
 D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.dll
 D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.pdb
+D:\Csharp\Prueba\Repaso.Persistencia\obj\Debug\Repaso.Persistencia.csproj.AssemblyReference.cache

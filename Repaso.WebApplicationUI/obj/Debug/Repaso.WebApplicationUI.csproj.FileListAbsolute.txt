@@ -87,8 +87,8 @@ D:\Csharp\Prueba\Repaso.WebApplicationUI\bin\es\System.Web.Razor.resources.dll
 D:\Csharp\Prueba\Repaso.WebApplicationUI\bin\es\System.Web.WebPages.resources.dll
 D:\Csharp\Prueba\Repaso.WebApplicationUI\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Csharp\Prueba\Repaso.WebApplicationUI\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.csprojAssemblyReference.cache
 D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.csproj.CoreCompileInputs.cache
 D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.csproj.CopyComplete
 D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.dll
 D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.pdb
+D:\Csharp\Prueba\Repaso.WebApplicationUI\obj\Debug\Repaso.WebApplicationUI.csproj.AssemblyReference.cache

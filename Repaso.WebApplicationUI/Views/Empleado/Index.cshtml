@@ -4,42 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <h2>Lista de Empleados</h2>
 
-<p>
-    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#empleadoModal">Nuevo Empleado</a>
-</p>
+<input type="button" class="btn btn-primary" onclick="createPartialView();" data-toggle="modal" value="Nuevo" data-target="#AgregarEmpleado" />
 
-<div class="modal fade" id="empleadoModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Información de Empleado</h2>
-            </div>
-            <div class="modal-body">
-                <form id="empleadoForm">
-                    <label>Nombre</label>
-                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
-                    <label>Dirección</label>
-                    @Html.TextBoxFor(m => m.Direccion, new { @class = "form-control" })
-                    <label>Email</label>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    <label>Telefono</label>
-                    @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group">
-                    <a href="#" id="btnSave" class="btn btn-primary mr-2">Guardar</a>
-                    <a href="#" id="btnCancel" class="btn btn-danger">Cancelar</a> 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
+<br />
 
 
 <div class="modal fade" id="deleteModal">
@@ -63,8 +34,6 @@
 
 
 
-
-
 <table class="table table-bordered">
     <tr class="btn-primary">
         <th>
@@ -82,75 +51,106 @@
         <th>Action</th>
     </tr>
 
-@foreach (var item in ViewBag.EmpleadoViewModel) {
-    <tr>
-        <td>
-            @item.Nombre
-        </td>
-        <td>
-            @item.Direccion
-        </td>
-        <td>
-            @item.Email
-        </td>
-        <td>
-            @item.Telefono
-        </td>
-        <td>
-            <a hrel="#" id="showModal" class="btn btn-danger" onclick="Confirm(@item.EmpleadoId)">Eliminar</a> |
-            @Html.ActionLink("Delete", "Delete", new { id = item.EmpleadoId })
-        </td>
-    </tr>
-}
+    @foreach (var item in ViewBag.EmpleadoViewModel)
+    {
+        <tr>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.Direccion
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.Telefono
+            </td>
+            <td>
+                <a hrel="#" id="showModal" class="btn btn-danger" onclick="Confirm(@item.EmpleadoId)">Eliminar</a> |
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AgregarEmpleado" onclick="obtenerEmpleado(@item.EmpleadoId);">Actualizar</a>
+            </td>
+        </tr>
+    }
 
 </table>
 
 <input type="hidden" id="empleadoId" />
 
-<script>
-    $(document).ready(function () {
-        $("#btnSave").click(function () {
-            var empleadoFormData = $("#empleadoForm").serialize();
+@section scripts{
 
+    <script type="text/javascript">
+
+        function createPartialView() {
+            var urlVista = "@Url.Action("Create", "Empleado")";
             $.ajax({
-                type: "POST",
-                url: "/Empleado/Create",
-                data: empleadoFormData,
-                success: function () {
-                    window.location.href = "/Empleado/Index";
-                }
-            })
-        })
-
-        $("#btnCancel").click(function () {
-            window.location.href = "/Empleado/Index";
-        })
-
-        $("#btnCancelConfirm").click(function () {
-            window.location.href = "/Empleado/Index";
-        })
-
-        $("#btnEliminar").click(function () {
-            var _id = $("#empleadoId").val();
-            $.ajax({
-                type: "POST",
-                url: "/Empleado/Delete",
-                data: { id:_id },
-                success: function (result) {
-                    if (result) {
-                        $("#deleteModal").modal('hide');
-                        $("#empleadoId").val(null);
-                        window.location.href = "/Empleado/Index";
-                    } else {
-                        alert("Se produjo un error al procesar su solicitud");
-                    } 
+                cache: false,
+                async: true,
+                type: "GET",
+                url: urlVista,
+                data: {},
+                success: function (response) {
+                    $('#resultado').empty().html(response);
+                    $("#AgregarEmpleado").modal("show");
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
                 }
             });
-        })
-    })
+        }
 
-    var Confirm = function (id) {
-        $("#empleadoId").val(id);
-        $("#deleteModal").modal('show');
-    }
-</script>
+        function obtenerEmpleado(id) {
+            //var id = $("#empleadoId").val();
+            let urlVista = "/empleado/update/" + id;
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: urlVista,
+                data: {},
+                success: function (response) {
+                    $("#resultado").empty().html(response);
+                    $("#AgregarEmpleado").modal("show");
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        }
+
+        function actualizarEmpleado(id) {
+            var fornulario = $(this);
+            var dataSerializada = formulario.serialize();
+            let urlVista = "/empleado/update/{id}";
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "POST",
+                url: urlVista,
+                data: dataSerializada,
+                success: function (response) {
+                    $("#resultado").empty().html(response);
+                    $("#AgregarEmpleado").modal("show");
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        }
+
+    </script>
+
+}
+
+
+<div id="AgregarEmpleado" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="resultado"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

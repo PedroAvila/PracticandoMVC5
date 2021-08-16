@@ -18,7 +18,14 @@ namespace Repaso.ServiciosDominio
 
         public void Create(Empleado entity)
         {
-            _empleadoRepository.Create(entity);
+            if (entity.EmpleadoId == 0)
+            {
+                _empleadoRepository.Create(entity);
+            }
+            else
+            {
+                _empleadoRepository.Update(entity);
+            }
         }
 
         public Empleado Single(int id)

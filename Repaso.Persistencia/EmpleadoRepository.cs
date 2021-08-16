@@ -50,13 +50,33 @@ namespace Repaso.Persistencia
                     cmd.CommandText = "INSERT INTO Empleados(Nombre, Direccion, Email, Telefono)" +
                                      " VALUES(@Nombre, @Direccion, @Email, @Telefono)";
                     cmd.Parameters.AddWithValue("@Nombre", entity.Nombre);
-                    cmd.Parameters.AddWithValue("@Direccion", entity.Direccion);
-                    cmd.Parameters.AddWithValue("@Email", entity.Email);
-                    cmd.Parameters.AddWithValue("@Telefono", entity.Telefono);
+                    cmd.Parameters.AddWithValue("@Direccion", (object)entity.Direccion ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Email", (object)entity.Email ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Telefono", (object)entity.Telefono ?? DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        public void Update(Empleado entity)
+        {
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["default"].ToString()))
+            {
+                cn.Open();
+                using (var cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE Empleados SET Nombre = @Nombre, Direccion = @Direccion, Email = @Email, Telefono = @Telefono" +
+                                     " WHERE EmpleadoId = @EmpleadoId";
+                    cmd.Parameters.AddWithValue("@EmpleadoId", entity.EmpleadoId);
+                    cmd.Parameters.AddWithValue("@Nombre", (object)entity.Nombre ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Direccion", (object)entity.Direccion ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Email", (object)entity.Email ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Telefono", (object)entity.Telefono ?? DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         public Empleado Single(int id)
         {

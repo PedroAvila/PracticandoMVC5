@@ -49,7 +49,7 @@ namespace Repaso.Persistencia
                 {
                     cmd.CommandText = "INSERT INTO Empleados(Nombre, Direccion, Email, Telefono)" +
                                      " VALUES(@Nombre, @Direccion, @Email, @Telefono)";
-                    cmd.Parameters.AddWithValue("@Nombre", entity.Nombre);
+                    cmd.Parameters.AddWithValue("@Nombre", (object)entity.Nombre ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@Direccion", (object)entity.Direccion ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", (object)entity.Email ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@Telefono", (object)entity.Telefono ?? DBNull.Value);

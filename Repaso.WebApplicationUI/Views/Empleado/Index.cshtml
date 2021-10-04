@@ -53,7 +53,7 @@
 
     @foreach (var item in ViewBag.EmpleadoViewModel)
     {
-        <tr>
+        <tr id="row_@item.EmpleadoId">
             <td>
                 @item.Nombre
             </td>
@@ -67,7 +67,7 @@
                 @item.Telefono
             </td>
             <td>
-                <a hrel="#" id="showModal" class="btn btn-danger" onclick="Confirm(@item.EmpleadoId)">Eliminar</a> |
+                <a hrel="#" id="showModal" class="btn btn-danger" onclick="ConfirmDelete(@item.EmpleadoId)">Eliminar</a> |
                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AgregarEmpleado" onclick="obtenerEmpleado(@item.EmpleadoId);">Actualizar</a>
             </td>
         </tr>
@@ -76,6 +76,26 @@
 </table>
 
 <input type="hidden" id="empleadoId" />
+
+<div class="modal fade" id="modalDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Eliminar empleado</h3>
+            </div>
+
+            <div class="modal-body">
+                <h4>Esta seguro que quiere borrarlo?</h4>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                <a href="#" class="btn btn-success" onclick="deleteEmployee()">Confirmar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
 
@@ -137,6 +157,27 @@
                 }
             });
         }
+
+        var ConfirmDelete = function (EmpleadoId) {
+            $("#empleadoId").val(EmpleadoId);
+            $("#modalDelete").modal('show');
+        }
+
+        var deleteEmployee = function () {
+
+            var empId = $("#empleadoId").val();
+            $.ajax({
+                type: "POST",
+                url: "/empleado/Delete",
+                data: { id: empId },
+                success: function () {
+                    $("#modalDelete").modal("hide");
+                    $("#row_" + empId).remove();
+                }
+            })
+
+        }
+
 
     </script>
 
